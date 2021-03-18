@@ -1,0 +1,23 @@
+{
+  "name": "auto-whitelist",
+  "version": "1.0.0",
+  "description": "CS50x Final Project: Trash Panda Gaming ARK auto-whitelist Discord bot for Patrons with a membership.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fakita1/auto-whitelist.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/fakita1/auto-whitelist/issues"
+  },
+  "homepage": "https://github.com/fakita1/auto-whitelist#readme",
+  "dependencies": {
+    "discord.js": "^12.5.1",
+    "mysql2": "^2.2.5"
+  }
+}
