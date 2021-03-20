@@ -39,12 +39,14 @@ let query = `CREATE TABLE IF NOT EXISTS ${config.mysql.discordAddonDb}.tpg_credi
 sql.execute(query);
 
 
-query = `CREATE TABLE IF NOT EXISTS ${config.mysql.discordAddonDb}.tgp_maps (
+query = `CREATE TABLE IF NOT EXISTS ${config.mysql.discordAddonDb}.tpg_maps (
     steamid TEXT NOT NULL,
     map TEXT NOT NULL,
     used_timestamp BIGINT NOT NULL,
-    credits_used INT NOT NULL,
+    days INT NOT NULL,
+    executed CHAR NULL DEFAULT NULL,
     expired CHAR NULL DEFAULT NULL
 )`;
+sql.execute(query);
 
 module.exports = {sql};
