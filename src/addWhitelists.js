@@ -5,7 +5,7 @@ const {sendEmbed, getDiscordAddonUser} = require('../src/util');
 
 
 async function addWhitelists() {
-    const [rows, fields] = await sql.execute(`SELECT * FROM ${config.mysql.discordAddonDb}.tpg_maps WHERE executed IS NULL;`);
+    const [rows, fields] = await sql.query(`SELECT * FROM ${config.mysql.discordAddonDb}.tpg_maps WHERE executed IS NULL;`);
 
     rows.forEach(async (row) => {
         let server = config.servers.find(x => x.id === row.map); // Get server config.
@@ -14,7 +14,7 @@ async function addWhitelists() {
             let responses = await sendRcon(server, [`AllowPlayerToJoinNoCheck ${row.steamid}`]);
             if (responses){
                 console.log(responses);
-                await sql.execute(`UPDATE ${config.mysql.discordAddonDb}.tpg_maps SET executed = '1' WHERE id = ?;`, [row.id]);
+                await sql.query(`UPDATE ${config.mysql.discordAddonDb}.tpg_maps SET executed = '1' WHERE id = ?;`, [row.id]);
                 console.log(`Successfully added ${row.steamid} to ${row.map}'s whitelist.`);
 
                 // Send private message with a notification.
@@ -23,7 +23,7 @@ async function addWhitelists() {
             }
 
         } else { // Mark as executed if server config does not exist anymore.
-            await sql.execute(`UPDATE ${config.mysql.discordAddonDb}.tpg_maps SET executed = '1' WHERE id = ?;`, [row.id]);
+            await sql.query(`UPDATE ${config.mysql.discordAddonDb}.tpg_maps SET executed = '1' WHERE id = ?;`, [row.id]);
         }
 
     })

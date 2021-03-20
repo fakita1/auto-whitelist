@@ -36,7 +36,7 @@ let query = `CREATE TABLE IF NOT EXISTS ${config.mysql.discordAddonDb}.tpg_credi
     used_map TEXT NULL DEFAULT NULL,
     UNIQUE INDEX id (id) USING BTREE
 )`;
-sql.execute(query);
+sql.query(query);
 
 
 query = `CREATE TABLE IF NOT EXISTS ${config.mysql.discordAddonDb}.tpg_maps (
@@ -49,6 +49,6 @@ query = `CREATE TABLE IF NOT EXISTS ${config.mysql.discordAddonDb}.tpg_maps (
     expired CHAR NULL DEFAULT NULL,
     UNIQUE INDEX id (id) USING BTREE
 )`;
-sql.execute(query);
+sql.query(query);
 
 module.exports = {sql};

@@ -5,7 +5,7 @@ const {sendEmbed, getDiscordAddonUser} = require('../src/util');
 
 
 async function removeWhitelists() {
-    const [rows, fields] = await sql.execute(`SELECT * FROM ${config.mysql.discordAddonDb}.tpg_maps WHERE expired IS NULL AND executed IS NOT NULL AND used_timestamp + days * 24 * 60 * 60 * 1000 < ?;`, [Date.now()]);
+    const [rows, fields] = await sql.query(`SELECT * FROM ${config.mysql.discordAddonDb}.tpg_maps WHERE expired IS NULL AND executed IS NOT NULL AND used_timestamp + days * 24 * 60 * 60 * 1000 < ?;`, [Date.now()]);
 
     rows.forEach(async (row) => {
         let server = config.servers.find(x => x.id === row.map); // Get server config.
@@ -14,7 +14,7 @@ async function removeWhitelists() {
             let responses = await sendRcon(server, [`DisallowPlayerToJoinNoCheck ${row.steamid}`, `KickPlayer ${row.steamid}`]);
             if (responses){
                 console.log(responses);
-                await sql.execute(`UPDATE ${config.mysql.discordAddonDb}.tpg_maps SET expired = '1' WHERE id = ?;`, [row.id]);
+                await sql.query(`UPDATE ${config.mysql.discordAddonDb}.tpg_maps SET expired = '1' WHERE id = ?;`, [row.id]);
                 console.log(`Successfully removed ${row.steamid} from ${row.map}'s whitelist.`);
 
                 // Send private message with a notification.
@@ -23,7 +23,7 @@ async function removeWhitelists() {
             }
 
         } else { // Expire whitelist if server config does not exist anymore.
-            await sql.execute(`UPDATE ${config.mysql.discordAddonDb}.tpg_maps SET expired = '1' WHERE id = ?;`, [row.id]);
+            await sql.query(`UPDATE ${config.mysql.discordAddonDb}.tpg_maps SET expired = '1' WHERE id = ?;`, [row.id]);
         }
 
     })

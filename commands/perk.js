@@ -50,11 +50,11 @@ module.exports = {
 
 
         for (let server of servers) {
-            const [rows, fields] = await sql.execute(`SELECT * FROM ${config.mysql.discordAddonDb}.tpg_maps WHERE steamid = ? AND map = ? AND expired IS NULL LIMIT 1;`, [steamid, server.id]);
+            const [rows, fields] = await sql.query(`SELECT * FROM ${config.mysql.discordAddonDb}.tpg_maps WHERE steamid = ? AND map = ? AND expired IS NULL LIMIT 1;`, [steamid, server.id]);
             if (rows.length) { // Player already whitelisted in the server, add more time to their whitelist.
-                await sql.execute(`UPDATE ${config.mysql.discordAddonDb}.tpg_maps SET days = days + ? WHERE steamid = ? AND map = ? AND expired IS NULL LIMIT 1;`, [item.days, steamid, server.id]);
+                await sql.query(`UPDATE ${config.mysql.discordAddonDb}.tpg_maps SET days = days + ? WHERE steamid = ? AND map = ? AND expired IS NULL LIMIT 1;`, [item.days, steamid, server.id]);
             } else {
-                await sql.execute(`INSERT INTO ${config.mysql.discordAddonDb}.tpg_maps (steamid, map, used_timestamp, days) VALUES (?, ?, ?, ?);`, [steamid, server.id, Date.now(), item.days]);
+                await sql.query(`INSERT INTO ${config.mysql.discordAddonDb}.tpg_maps (steamid, map, used_timestamp, days) VALUES (?, ?, ?, ?);`, [steamid, server.id, Date.now(), item.days]);
             }
         }
 

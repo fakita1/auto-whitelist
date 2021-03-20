@@ -27,7 +27,7 @@ module.exports = {
         for (let i = 0; i < item.amount; i++) {
             values.push(`('${steamid}', '${item.type}', ${now})`);
         }
-        await sql.execute(`INSERT INTO ${config.mysql.discordAddonDb}.tpg_credits (steamid, credit_type, added_timestamp) VALUES ${values.join(', ')};`);
+        await sql.query(`INSERT INTO ${config.mysql.discordAddonDb}.tpg_credits (steamid, credit_type, added_timestamp) VALUES ${values.join(', ')};`);
 
         await sendEmbed(message, {description: `Successfully bought **${item.name}** for ${item.price} TrashSnacks.`});
     }

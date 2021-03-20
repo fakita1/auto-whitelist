@@ -15,12 +15,12 @@ module.exports = {
         if (!user) return sendEmbed(message, {description: `${taggedUser.tag}'s account is not linked to any SteamID`});
 
         // Setting all unused credits as used.
-        await sql.execute(`UPDATE ${config.mysql.discordAddonDb}.tpg_credits SET used_timestamp = ?, used_map = ? WHERE steamid = ? AND used_timestamp IS NULL;`, [Date.now(), 'admin_remove', user.SteamId]);
+        await sql.query(`UPDATE ${config.mysql.discordAddonDb}.tpg_credits SET used_timestamp = ?, used_map = ? WHERE steamid = ? AND used_timestamp IS NULL;`, [Date.now(), 'admin_remove', user.SteamId]);
 
 
         // Expire automated function will later remove whitelist.
         // Executed = '1' to prevent non-executed whitelists to be executed later.
-        await sql.execute(`UPDATE ${config.mysql.discordAddonDb}.tpg_maps SET used_timestamp = 0, executed = '1' WHERE steamid = ? AND expired IS NULL;`, [user.SteamId]);
+        await sql.query(`UPDATE ${config.mysql.discordAddonDb}.tpg_maps SET used_timestamp = 0, executed = '1' WHERE steamid = ? AND expired IS NULL;`, [user.SteamId]);
 
 
         await sendEmbed(message, {description: `Successfully removed all ${taggedUser.tag}'s credits and active whitelists.`});

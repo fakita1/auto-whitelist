@@ -27,7 +27,7 @@ module.exports = {
             values.push(`('${user.SteamId}', 'all', ${now})`);
         }
 
-        await sql.execute(`INSERT INTO ${config.mysql.discordAddonDb}.tpg_credits (steamid, credit_type, added_timestamp) VALUES ${values.join(', ')};`);
+        await sql.query(`INSERT INTO ${config.mysql.discordAddonDb}.tpg_credits (steamid, credit_type, added_timestamp) VALUES ${values.join(', ')};`);
         await sendEmbed(message, {description: `Successfully added ${taggedUser.tag} **${tier.mapCredits} Shiny's** and **${tier.allCredits} Bundles**.`});
     }
 };

@@ -34,7 +34,7 @@ function sendEmbed(message, options) {
 function getDiscordAddonUser(id) {
     return new Promise(async (resolve, reject) => {
 
-        const [rows, fields] = await sql.execute(`SELECT * FROM ${config.mysql.discordAddonDb}.discordaddonplayers WHERE discid = ? OR steamid = ? LIMIT 1;`, [id, id]);
+        const [rows, fields] = await sql.query(`SELECT * FROM ${config.mysql.discordAddonDb}.discordaddonplayers WHERE discid = ? OR steamid = ? LIMIT 1;`, [id, id]);
         resolve(rows[0]);
 
     });
@@ -45,7 +45,7 @@ function getDiscordAddonUser(id) {
 function getPoints(steamid) {
     return new Promise(async (resolve, reject) => {
 
-        const [rows, fields] = await sql.execute(`SELECT * FROM ${config.mysql.shopDb}.arkshopplayers WHERE SteamId = ? LIMIT 1;`, [steamid]);
+        const [rows, fields] = await sql.query(`SELECT * FROM ${config.mysql.shopDb}.arkshopplayers WHERE SteamId = ? LIMIT 1;`, [steamid]);
         if (!rows.length) return resolve(0);
         resolve(rows[0].Points);
 
@@ -57,7 +57,7 @@ function getPoints(steamid) {
 function removePoints(steamid, amount) {
     return new Promise(async (resolve, reject) => {
 
-        const [rows, fields] = await sql.execute(`UPDATE ${config.mysql.shopDb}.arkshopplayers SET Points = Points - ? WHERE SteamId = ? LIMIT 1;`, [amount, steamid]);
+        const [rows, fields] = await sql.query(`UPDATE ${config.mysql.shopDb}.arkshopplayers SET Points = Points - ? WHERE SteamId = ? LIMIT 1;`, [amount, steamid]);
         if (!rows.length) return resolve(false);
         resolve(rows[0].Points);
 
@@ -69,7 +69,7 @@ function removePoints(steamid, amount) {
 function getCredits(steamid, type) {
     return new Promise(async (resolve, reject) => {
 
-        const [rows, fields] = await sql.execute(`SELECT * FROM ${config.mysql.discordAddonDb}.tpg_credits WHERE steamid = ? AND used_timestamp IS NULL AND credit_type = ?;`, [steamid, type]);
+        const [rows, fields] = await sql.query(`SELECT * FROM ${config.mysql.discordAddonDb}.tpg_credits WHERE steamid = ? AND used_timestamp IS NULL AND credit_type = ?;`, [steamid, type]);
         resolve(rows.length);
 
     });
@@ -80,7 +80,7 @@ function getCredits(steamid, type) {
 function removeCredits(steamid, type, amount, map) {
     return new Promise(async (resolve, reject) => {
 
-        const [results, fields] = await sql.execute(`UPDATE ${config.mysql.discordAddonDb}.tpg_credits SET used_timestamp = ?, used_map = ? WHERE steamid = ? AND used_timestamp IS NULL AND credit_type = ? LIMIT ?;`, [Date.now(), map, steamid, type, amount]);
+        const [results, fields] = await sql.query(`UPDATE ${config.mysql.discordAddonDb}.tpg_credits SET used_timestamp = ?, used_map = ? WHERE steamid = ? AND used_timestamp IS NULL AND credit_type = ? LIMIT ?;`, [Date.now(), map, steamid, type, amount]);
         if (results.affectedRows === amount) resolve(true);
         else resolve(false);
 
