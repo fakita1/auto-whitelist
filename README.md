@@ -9,6 +9,7 @@ This project was made for Trash Panda Gaming and consists on a credits system th
 
 This bot has several commands that allows server administrator to manage their users credits.
 
+Once the user redeems a perk, the bot will send an RCON command to the selected server adding them to the Whitelist and allowing them to join.
 
 #### Configuration:
 Make a copy of ***config-sample.json*** and rename it to ***config.json***.
