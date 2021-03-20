@@ -14,7 +14,7 @@ module.exports = {
         let user = await getDiscordAddonUser(message.author.id);
         if (!user) return sendEmbed(message, {description: `${taggedUser.tag}'s account is not linked to any SteamID`});
 
-        await sql.execute(`UPDATE ${config.mysql.discordAddonDb}.tpg_credits SET used_timestamp = ?, used_map = ? WHERE steamid = ?;`, [Date.now(), 'admin_remove', user.SteamId]);
+        await sql.execute(`UPDATE ${config.mysql.discordAddonDb}.tpg_credits SET used_timestamp = ?, used_map = ? WHERE steamid = ? AND used_timestamp IS NULL;`, [Date.now(), 'admin_remove', user.SteamId]);
 
         await sendEmbed(message, {description: `Successfully removed all ${taggedUser.tag}'s credits and active whitelists.`});
     }

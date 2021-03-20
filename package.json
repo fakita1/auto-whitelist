@@ -18,6 +18,7 @@
   "homepage": "https://github.com/fakita1/auto-whitelist#readme",
   "dependencies": {
     "discord.js": "^12.5.1",
-    "mysql2": "^2.2.5"
+    "mysql2": "^2.2.5",
+    "source-rcon-client": "^0.0.10"
   }
 }
