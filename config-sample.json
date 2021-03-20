@@ -1,1 +1,97 @@
-{}
+{
+  "botToken": "",
+  "mysql": {
+    "host": "localhost",
+    "user": "root",
+    "password": "",
+    "discordAddonDb": "",
+    "shopDb": ""
+  },
+  "adminIDs": [
+    "275608753783439360"
+  ],
+  "embeds": {
+    "title": "TPG auto-whitelist",
+    "color": "#32a2e3"
+  },
+  "botStatus": "TPG servers",
+  "botPrefix": ".",
+  "maps": [
+    {
+      "id": "ragna",
+      "alias": "Ragnarok #1",
+      "ip": "",
+      "rconPort": "32400",
+      "adminPassword": ""
+    }
+  ],
+  "shop": [
+    {
+      "type": "map",
+      "amount": 1,
+      "price": 1000
+    },
+    {
+      "type": "map",
+      "amount": 3,
+      "price": 2000
+    },
+    {
+      "type": "map",
+      "amount": 7,
+      "price": 4000
+    },
+    {
+      "type": "map",
+      "amount": 14,
+      "price": 8000
+    },
+    {
+      "type": "map",
+      "amount": 30,
+      "price": 12500
+    },
+    {
+      "type": "all",
+      "amount": 14,
+      "price": 40000
+    },
+    {
+      "type": "all",
+      "amount": 30,
+      "price": 65000
+    }
+  ],
+  "tiers": [
+    {
+      "id": "1",
+      "mapCredits": 2,
+      "allCredits": 0
+    },
+    {
+      "id": "2",
+      "mapCredits": 2,
+      "allCredits": 2
+    },
+    {
+      "id": "3",
+      "mapCredits": 6,
+      "allCredits": 2
+    },
+    {
+      "id": "4",
+      "mapCredits": 12,
+      "allCredits": 6
+    },
+    {
+      "id": "5",
+      "mapCredits": 12,
+      "allCredits": 12
+    },
+    {
+      "id": "6",
+      "mapCredits": 0,
+      "allCredits": 50
+    }
+  ]
+}
