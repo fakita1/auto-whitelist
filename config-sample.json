@@ -16,82 +16,134 @@
   },
   "botStatus": "TPG servers",
   "botPrefix": ".",
-  "maps": [
+  "servers": [
     {
-      "id": "ragna",
-      "alias": "Ragnarok #1",
+      "id": "ragna1",
+      "name": "Ragnarok 1",
       "ip": "",
-      "rconPort": "32400",
+      "rconPort": 32400,
       "adminPassword": ""
+    },
+    {
+      "id": "val",
+      "name": "Valguero",
+      "ip": "",
+      "rconPort": 32400,
+      "adminPassword": ""
+    }
+  ],
+  "perks": [
+    {
+      "id": "30all",
+      "type": "all",
+      "days": 30,
+      "price": 1
+    },
+    {
+      "id": "30map",
+      "type": "map",
+      "days": 30,
+      "price": 30
+    },
+    {
+      "id": "14map",
+      "type": "map",
+      "days": 14,
+      "price": 14
+    },
+    {
+      "id": "7map",
+      "type": "map",
+      "days": 7,
+      "price": 7
+    },
+    {
+      "id": "3map",
+      "type": "map",
+      "days": 3,
+      "price": 3
+    },
+    {
+      "id": "1map",
+      "type": "map",
+      "days": 1,
+      "price": 1
     }
   ],
   "shop": [
     {
-      "type": "map",
+      "id": "all30",
+      "name": "30D All Bundle",
+      "type": "all",
       "amount": 1,
-      "price": 1000
+      "price": 65000
     },
     {
-      "type": "map",
-      "amount": 3,
-      "price": 2000
-    },
-    {
-      "type": "map",
-      "amount": 7,
-      "price": 4000
-    },
-    {
-      "type": "map",
-      "amount": 14,
-      "price": 8000
-    },
-    {
+      "id": "map30",
+      "name": "30 Shiny's",
       "type": "map",
       "amount": 30,
       "price": 12500
     },
     {
-      "type": "all",
+      "id": "map14",
+      "name": "14 Shiny's",
+      "type": "map",
       "amount": 14,
-      "price": 40000
+      "price": 8000
     },
     {
-      "type": "all",
-      "amount": 30,
-      "price": 65000
+      "id": "map7",
+      "name": "7 Shiny's",
+      "type": "map",
+      "amount": 7,
+      "price": 4000
+    },
+    {
+      "id": "map3",
+      "name": "3 Shiny's",
+      "type": "map",
+      "amount": 3,
+      "price": 2000
+    },
+    {
+      "id": "map1",
+      "name": "1 Shiny",
+      "type": "map",
+      "amount": 1,
+      "price": 1000
     }
   ],
   "tiers": [
     {
-      "id": "1",
-      "mapCredits": 2,
+      "id": "tier1",
+      "mapCredits": 0,
       "allCredits": 0
     },
     {
-      "id": "2",
-      "mapCredits": 2,
-      "allCredits": 2
+      "id": "tier2",
+      "mapCredits": 30,
+      "allCredits": 0
     },
     {
-      "id": "3",
-      "mapCredits": 6,
-      "allCredits": 2
+      "id": "tier3",
+      "mapCredits": 60,
+      "allCredits": 0
     },
     {
-      "id": "4",
+      "id": "tier4",
       "mapCredits": 12,
-      "allCredits": 6
+      "allCredits": 1
     },
     {
-      "id": "5",
-      "mapCredits": 12,
-      "allCredits": 12
+      "id": "tier5",
+      "mapCredits": 30,
+      "allCredits": 1
     },
     {
-      "id": "6",
+      "id": "tier6",
       "mapCredits": 0,
-      "allCredits": 50
+      "allCredits": 2
     }
   ]
 }
