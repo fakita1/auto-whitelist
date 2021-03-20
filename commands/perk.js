@@ -58,6 +58,6 @@ module.exports = {
             }
         }
 
-        await sendEmbed(message, {description: `**Successfully redeemed** \`${item.id}\`, please **allow up to 1 minute** for the server to process your request. You will receive a **confirmation by private message** once the process finishes (make sure your DM's are open).`});
+        await sendEmbed(message, {description: `**Successfully redeemed** \`${item.id}\` in **${item.type === 'map' ? ` ${servers[0].id}`: 'all maps'}**, please **allow up to 1 minute** for the server to process your request. You will receive a **confirmation by private message** once the process finishes (make sure your DM's are open).`});
     }
 };
