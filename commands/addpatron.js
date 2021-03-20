@@ -14,7 +14,7 @@ module.exports = {
         const tier = config.tiers.find(x => x.id === args[1]);
         if (!tier) return sendEmbed(message, {description: `Selected tier does not exist.`});
 
-        let user = await getDiscordAddonUser(message.author.id);
+        let user = await getDiscordAddonUser(taggedUser.id);
         if (!user) return sendEmbed(message, {description: `${taggedUser.tag}'s account is not linked to any SteamID`});
 
 
