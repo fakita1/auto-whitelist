@@ -50,4 +50,24 @@ function removePoints(steamid, amount) {
 }
 
 
-module.exports = {sendEmbed, getDiscordAddonUser, getPoints, removePoints};
+function getCredits(steamid, type) {
+    return new Promise(async (resolve, reject) => {
+
+        const [rows, fields] = await sql.execute(`SELECT * FROM ${config.mysql.discordAddonDb}.tpg_credits WHERE steamid = ? AND used_timestamp IS NULL AND credit_type = ?;`, [steamid, type]);
+        resolve(rows.length);
+
+    });
+}
+
+function removeCredits(steamid, type, amount, map) {
+    return new Promise(async (resolve, reject) => {
+
+        const [results, fields] = await sql.execute(`UPDATE ${config.mysql.discordAddonDb}.tpg_credits SET used_timestamp = ?, used_map = ? WHERE steamid = ? AND used_timestamp IS NULL AND credit_type = ? LIMIT ?;`, [Date.now(), map, steamid, type, amount]);
+        if (results.affectedRows === amount) resolve(true);
+        else resolve(false);
+
+    });
+}
+
+
+module.exports = {sendEmbed, getDiscordAddonUser, getPoints, removePoints, getCredits, removeCredits};
