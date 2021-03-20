@@ -59,7 +59,7 @@ client.on('message', async message => {
         }
 
 
-        command.query(message, args, steamid);
+        command.execute(message, args, steamid);
 
     } catch (error) {
         console.error(error);
