@@ -3,31 +3,45 @@ const config = require('../config.json');
 const {sql} = require('../mysql/pool');
 
 
+// Sends a default embed with specified options.
 function sendEmbed(message, options) {
     return new Promise(async (resolve, reject) => {
 
+        let user, channel;
+        if (typeof message === 'string') {
+            const {client} = require('../index');
+            user = client.users.cache.get(message);
+            channel = user;
+        } else {
+            channel = message.channel;
+        }
+
+
         const embed = new MessageEmbed()
             .setTitle(options.title || config.embeds.title)
-            .setDescription(`<@${message.author.id}> ${options.description}`)
+            .setDescription((user ? '' : `<@${ message.author.id}> `) + options.description)
             .setColor(config.embeds.color);
 
         if (options.image) embed.setThumbnail(options.image);
 
-        resolve(await message.channel.send(embed));
+        resolve(await channel.send(embed));
 
     });
 }
 
+
+// Gets user row from DiscordAddon table (where users verify their SteamID).
 function getDiscordAddonUser(id) {
     return new Promise(async (resolve, reject) => {
 
-        const [rows, fields] = await sql.execute(`SELECT * FROM ${config.mysql.discordAddonDb}.discordaddonplayers WHERE discid = ? LIMIT 1;`, [id]);
+        const [rows, fields] = await sql.execute(`SELECT * FROM ${config.mysql.discordAddonDb}.discordaddonplayers WHERE discid = ? OR steamid = ? LIMIT 1;`, [id, id]);
         resolve(rows[0]);
 
     });
 }
 
 
+// Gets user points amount.
 function getPoints(steamid) {
     return new Promise(async (resolve, reject) => {
 
@@ -39,6 +53,7 @@ function getPoints(steamid) {
 }
 
 
+// Removes specified amount of points and returns if query was successful.
 function removePoints(steamid, amount) {
     return new Promise(async (resolve, reject) => {
 
@@ -50,6 +65,7 @@ function removePoints(steamid, amount) {
 }
 
 
+// Gets credit amount within the specified type (map: Single map credit (Shiny's) | all: Bundle Credits).
 function getCredits(steamid, type) {
     return new Promise(async (resolve, reject) => {
 
@@ -59,6 +75,8 @@ function getCredits(steamid, type) {
     });
 }
 
+
+// Removes specified amount of credits and returns if query was successful.
 function removeCredits(steamid, type, amount, map) {
     return new Promise(async (resolve, reject) => {
 
@@ -68,6 +86,7 @@ function removeCredits(steamid, type, amount, map) {
 
     });
 }
+
 
 
 module.exports = {sendEmbed, getDiscordAddonUser, getPoints, removePoints, getCredits, removeCredits};

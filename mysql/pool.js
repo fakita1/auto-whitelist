@@ -40,12 +40,14 @@ sql.execute(query);
 
 
 query = `CREATE TABLE IF NOT EXISTS ${config.mysql.discordAddonDb}.tpg_maps (
+    id INT NOT NULL AUTO_INCREMENT,
     steamid TEXT NOT NULL,
     map TEXT NOT NULL,
     used_timestamp BIGINT NOT NULL,
     days INT NOT NULL,
     executed CHAR NULL DEFAULT NULL,
-    expired CHAR NULL DEFAULT NULL
+    expired CHAR NULL DEFAULT NULL,
+    UNIQUE INDEX id (id) USING BTREE
 )`;
 sql.execute(query);
 

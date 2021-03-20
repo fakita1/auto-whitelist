@@ -18,6 +18,7 @@ module.exports = {
         if (!user) return sendEmbed(message, {description: `${taggedUser.tag}'s account is not linked to any SteamID`});
 
 
+        // Adding values dynamically to query.
         let values = [], now = Date.now();
         for (let i = 0; i < tier.mapCredits; i++) {
             values.push(`('${user.SteamId}', 'map', ${now})`);

@@ -8,7 +8,7 @@ module.exports = {
     async execute(message, args, steamid) {
 
         let id = args[0];
-        if (!id){
+        if (!id){ // Help message.
             let desc = `This is our current shop list! Please follow the following syntax:\n\n\n`;
             config.shop.forEach(item => {
                desc += `**${item.name}** (${item.price} TrashSnacks): \`${config.botPrefix}buy ${item.id}\`\n\n`;

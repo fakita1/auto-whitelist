@@ -21,6 +21,15 @@ for (const file of commandFiles) {
 client.on('ready', async () => {
     console.log('Bot online!');
     await client.user.setActivity(config.botStatus);
+
+    let {addWhitelists} = require('./src/addWhitelists');
+    let {removeWhitelists} = require('./src/removeWhitelists');
+
+    setInterval(() => {
+        addWhitelists(); // Adds whitelist to not executed orders.
+        removeWhitelists(); // Removes whitelist to expired orders.
+    }, 10000);
+
 });
 
 
