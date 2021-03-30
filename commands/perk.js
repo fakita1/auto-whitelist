@@ -12,20 +12,20 @@ module.exports = {
         let mapCredits = await getCredits(steamid, 'map');
 
         if (!args[0]) {
-            let desc = `Gain access to our extra rates exclusive servers! You currently have **${allCredits} Bundles** and **${mapCredits} Shiny's**.\n\n\n**__All servers whitelist__**\n`;
+            let desc = `\nGain access to our extra rates exclusive servers! \n You currently have: \n **${allCredits} Bundles** \n **${mapCredits} Shiny's**\n Use **__TP!bal__** to check current balance\n\n\n**__Server Bundle Packs__** (Includes access to all Map IDs) \n`;
 
             config.perks.filter(x => x.type === 'all').forEach(perk => {
                 desc += `${perk.days} days | ${perk.price} Bundles: \`${config.botPrefix}perk ${perk.id}\`\n`;
             });
-            desc += `\n**__Single server whitelist__**\n`;
+            desc += `\n Available **__perk IDs__**, **__cost__** and **__command__**\n`;
             config.perks.filter(x => x.type === 'map').forEach(perk => {
-                desc += `${perk.days} days | ${perk.price} Shiny's: \`${config.botPrefix}perk ${perk.id} {mapID}\`\n`;
+                desc += `ID - **__${perk.days}day__** = **__${perk.price}__** Shiny's | \`${config.botPrefix}perk ${perk.id} {mapID}\`\n`;
             });
 
-            desc += `\n**__Server list__** (not needed for Bundles)\n`;
+            desc += `\n**__Map ID__** and **__command__** (not needed for Bundles)\n`;
 
             config.servers.forEach(server => {
-                desc += `${server.name} | \`${config.botPrefix}perk {perkID} ${server.id}\`\n`;
+                desc += `ID - **__${server.name}__** | \`${config.botPrefix}perk {perkID} ${server.id}\`\n`;
             });
 
             return await sendEmbed(message, {description: desc});

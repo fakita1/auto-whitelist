@@ -4,7 +4,7 @@ const {sql} = require('../mysql/pool');
 
 
 module.exports = {
-    name: 'balance',
+    name: 'bal',
     requiresSteamVerification: true,
     async execute(message, args, steamid) {
 
@@ -17,7 +17,7 @@ module.exports = {
         for (let row of rows) {
             activeWhitelistsText += `\`${row.map}\`: ${((Date.now() - row.used_timestamp + row.days * 24 * 60 * 60 * 1000) / (1000 * 60 * 60 * 24)).toFixed(1)} days left.\n`;
         }
-        await sendEmbed(message, {description: `You currently have **${allCredits} Bundles** and **${mapCredits} Shiny's**.
+        await sendEmbed(message, {description: `\n Your Current Balance \n **${allCredits} Bundles** \n **${mapCredits} Shiny's**. 
         \n\n**__Active whitelists__**\n${activeWhitelistsText}`});
 
     }
