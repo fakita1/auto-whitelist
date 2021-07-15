@@ -20,7 +20,7 @@ function sendRcon(server, commands) {
             resolve(false);
         }
 
-    })
+    });
 }
 
 

@@ -12,7 +12,7 @@ async function removeWhitelists() {
 
         if (server) {
             let responses = await sendRcon(server, [`DisallowPlayerToJoinNoCheck ${row.steamid}`, `KickPlayer ${row.steamid}`]);
-            if (responses){
+            if (responses) {
                 console.log(responses);
                 await sql.query(`UPDATE ${config.mysql.discordAddonDb}.tpg_maps SET expired = '1' WHERE id = ?;`, [row.id]);
                 console.log(`Successfully removed ${row.steamid} from ${row.map}'s whitelist.`);
@@ -26,7 +26,7 @@ async function removeWhitelists() {
             await sql.query(`UPDATE ${config.mysql.discordAddonDb}.tpg_maps SET expired = '1' WHERE id = ?;`, [row.id]);
         }
 
-    })
+    });
 }
 
 

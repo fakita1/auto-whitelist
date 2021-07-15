@@ -19,7 +19,7 @@ function sendEmbed(message, options) {
 
         const embed = new MessageEmbed()
             .setTitle(options.title || config.embeds.title)
-            .setDescription((user ? '' : `<@${ message.author.id}> `) + options.description)
+            .setDescription((user ? '' : `<@${message.author.id}> `) + options.description)
             .setColor(config.embeds.color);
 
         if (options.image) embed.setThumbnail(options.image);
@@ -86,7 +86,6 @@ function removeCredits(steamid, type, amount, map) {
 
     });
 }
-
 
 
 module.exports = {sendEmbed, getDiscordAddonUser, getPoints, removePoints, getCredits, removeCredits};

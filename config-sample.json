@@ -11,11 +11,11 @@
     "275608753783439360"
   ],
   "embeds": {
-    "title": "TPG auto-whitelist",
+    "title": "TPG Shiny System",
     "color": "#32a2e3"
   },
-  "botStatus": "TPG servers",
-  "botPrefix": ".",
+  "botStatus": "Playing Find the TrashPandas",
+  "botPrefix": "TP!",
   "servers": [
     {
       "id": "ragna1",
@@ -37,34 +37,40 @@
       "id": "30all",
       "type": "all",
       "days": 30,
+      "price": 2
+    },
+    {
+      "id": "14all",
+      "type": "all",
+      "days": 14,
       "price": 1
     },
     {
-      "id": "30map",
+      "id": "30day",
       "type": "map",
       "days": 30,
       "price": 30
     },
     {
-      "id": "14map",
+      "id": "14day",
       "type": "map",
       "days": 14,
       "price": 14
     },
     {
-      "id": "7map",
+      "id": "7day",
       "type": "map",
       "days": 7,
       "price": 7
     },
     {
-      "id": "3map",
+      "id": "3day",
       "type": "map",
       "days": 3,
       "price": 3
     },
     {
-      "id": "1map",
+      "id": "1day",
       "type": "map",
       "days": 1,
       "price": 1
@@ -72,76 +78,81 @@
   ],
   "shop": [
     {
-      "id": "all30",
-      "name": "30D All Bundle",
+      "id": "bundle",
+      "name": "__All Map Bundle Credit__ \n Includes 1 Bundle credit",
       "type": "all",
       "amount": 1,
-      "price": 65000
+      "price": 25000
     },
     {
-      "id": "map30",
-      "name": "30 Shiny's",
+      "id": "30shiny",
+      "name": "__Individual Credits__ \n 30 Shiny's",
       "type": "map",
       "amount": 30,
-      "price": 12500
-    },
-    {
-      "id": "map14",
-      "name": "14 Shiny's",
-      "type": "map",
-      "amount": 14,
       "price": 8000
     },
     {
-      "id": "map7",
+      "id": "14shiny",
+      "name": "14 Shiny's",
+      "type": "map",
+      "amount": 14,
+      "price": 5000
+    },
+    {
+      "id": "7shiny",
       "name": "7 Shiny's",
       "type": "map",
       "amount": 7,
-      "price": 4000
+      "price": 2500
     },
     {
-      "id": "map3",
+      "id": "3shiny",
       "name": "3 Shiny's",
       "type": "map",
       "amount": 3,
-      "price": 2000
+      "price": 1000
     },
     {
-      "id": "map1",
+      "id": "1shiny",
       "name": "1 Shiny",
       "type": "map",
       "amount": 1,
-      "price": 1000
+      "price": 400
     }
   ],
   "tiers": [
     {
-      "id": "tier1",
-      "mapCredits": 0,
-      "allCredits": 0
-    },
-    {
-      "id": "tier2",
+      "id": "bronze",
       "mapCredits": 30,
       "allCredits": 0
     },
     {
-      "id": "tier3",
+      "id": "silver",
       "mapCredits": 60,
       "allCredits": 0
     },
     {
-      "id": "tier4",
-      "mapCredits": 12,
-      "allCredits": 1
+      "id": "gold",
+      "mapCredits": 0,
+      "allCredits": 2
     },
     {
-      "id": "tier5",
-      "mapCredits": 30,
-      "allCredits": 1
+      "id": "diamond",
+      "mapCredits": 60,
+      "allCredits": 0
     },
     {
-      "id": "tier6",
+      "id": "plat",
+      "mapCredits": 0,
+      "allCredits": 2
+    },
+    {
+      "id": "shiny",
+      "mapCredits": 0,
+      "allCredits": 2
+    },
+    {
+      "id": "maps",
       "mapCredits": 0,
       "allCredits": 2
     }

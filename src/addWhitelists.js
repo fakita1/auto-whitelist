@@ -12,7 +12,7 @@ async function addWhitelists() {
 
         if (server) {
             let responses = await sendRcon(server, [`AllowPlayerToJoinNoCheck ${row.steamid}`]);
-            if (responses){
+            if (responses) {
                 console.log(responses);
                 await sql.query(`UPDATE ${config.mysql.discordAddonDb}.tpg_maps SET executed = '1' WHERE id = ?;`, [row.id]);
                 console.log(`Successfully added ${row.steamid} to ${row.map}'s whitelist.`);
@@ -26,7 +26,7 @@ async function addWhitelists() {
             await sql.query(`UPDATE ${config.mysql.discordAddonDb}.tpg_maps SET executed = '1' WHERE id = ?;`, [row.id]);
         }
 
-    })
+    });
 }
 
 
