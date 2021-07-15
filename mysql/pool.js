@@ -27,18 +27,6 @@ sql.getConnection((err, connection) => {
 });
 
 
-let query = `CREATE TABLE IF NOT EXISTS ${config.mysql.discordAddonDb}.tpg_credits (
-    id INT NOT NULL AUTO_INCREMENT,
-    steamid TEXT NOT NULL,
-    credit_type TEXT NOT NULL,
-    added_timestamp BIGINT NOT NULL,
-    used_timestamp BIGINT NULL DEFAULT NULL,
-    used_map TEXT NULL DEFAULT NULL,
-    UNIQUE INDEX id (id) USING BTREE
-)`;
-sql.query(query);
-
-
 query = `CREATE TABLE IF NOT EXISTS ${config.mysql.discordAddonDb}.tpg_maps (
     id INT NOT NULL AUTO_INCREMENT,
     steamid TEXT NOT NULL,

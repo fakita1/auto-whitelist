@@ -35,7 +35,17 @@ function getDiscordAddonUser(id) {
     return new Promise(async (resolve, reject) => {
 
         const [rows, fields] = await sql.query(`SELECT * FROM ${config.mysql.discordAddonDb}.discordaddonplayers WHERE discid = ? OR steamid = ? LIMIT 1;`, [id, id]);
-        resolve(rows[0]);
+        let user = rows[0];
+
+        let credits = JSON.parse(user.tpg_credits);
+
+        if (!credits.map) credits.map = 0;
+        if (!credits.map15) credits.map15 = 0;
+        if (!credits.all15) credits.all15 = 0;
+
+        user.credits = credits;
+
+        resolve(user);
 
     });
 }
@@ -65,27 +75,14 @@ function removePoints(steamid, amount) {
 }
 
 
-// Gets credit amount within the specified type (map: Single map credit (Shiny's) | all: Bundle Credits).
-function getCredits(steamid, type) {
+function updateCredits(user) {
     return new Promise(async (resolve, reject) => {
 
-        const [rows, fields] = await sql.query(`SELECT * FROM ${config.mysql.discordAddonDb}.tpg_credits WHERE steamid = ? AND used_timestamp IS NULL AND credit_type = ?;`, [steamid, type]);
-        resolve(rows.length);
+        await sql.query(`UPDATE ${config.mysql.discordAddonDb}.discordaddonplayers SET tpg_credits = ? WHERE discid = ?;`, [ JSON.stringify(user.credits), user.discid]);
+        resolve(true);
 
     });
 }
 
 
-// Removes specified amount of credits and returns if query was successful.
-function removeCredits(steamid, type, amount, map) {
-    return new Promise(async (resolve, reject) => {
-
-        const [results, fields] = await sql.query(`UPDATE ${config.mysql.discordAddonDb}.tpg_credits SET used_timestamp = ?, used_map = ? WHERE steamid = ? AND used_timestamp IS NULL AND credit_type = ? LIMIT ?;`, [Date.now(), map, steamid, type, amount]);
-        if (results.affectedRows === amount) resolve(true);
-        else resolve(false);
-
-    });
-}
-
-
-module.exports = {sendEmbed, getDiscordAddonUser, getPoints, removePoints, getCredits, removeCredits};
+module.exports = {sendEmbed, getDiscordAddonUser, getPoints, removePoints, updateCredits};

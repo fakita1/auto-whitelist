@@ -1,6 +1,5 @@
 const config = require('../config.json');
-const {sendEmbed, getDiscordAddonUser} = require('../src/util');
-const {sql} = require('../mysql/pool');
+const {sendEmbed, getDiscordAddonUser, updateCredits} = require('../src/util');
 
 
 module.exports = {
@@ -17,17 +16,14 @@ module.exports = {
         let user = await getDiscordAddonUser(taggedUser.id);
         if (!user) return sendEmbed(message, {description: `${taggedUser.tag}'s account is not linked to any SteamID`});
 
+        let credits = user.credits;
 
-        // Adding values dynamically to query.
-        let values = [], now = Date.now();
-        for (let i = 0; i < tier.mapCredits; i++) {
-            values.push(`('${user.SteamId}', 'map', ${now})`);
-        }
-        for (let i = 0; i < tier.allCredits; i++) {
-            values.push(`('${user.SteamId}', 'all', ${now})`);
-        }
+        credits.map += tier.mapCredits;
+        credits.map15 += tier.map15Credits;
+        credits.all15 += tier.all15Credits;
 
-        await sql.query(`INSERT INTO ${config.mysql.discordAddonDb}.tpg_credits (steamid, credit_type, added_timestamp) VALUES ${values.join(', ')};`);
-        await sendEmbed(message, {description: `Successfully added ${taggedUser.tag} **${tier.mapCredits} Shiny's** and **${tier.allCredits} Bundles**.`});
+        await updateCredits(user);
+
+        await sendEmbed(message, {description: `Successfully added ${taggedUser.tag} **${tier.mapCredits} Shiny's**, **${tier.map15Credits} Clumps** and **${tier.all15Credits} Bundles**.`});
     }
 };

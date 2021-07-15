@@ -1,23 +1,25 @@
 const config = require('../config.json');
-const {sendEmbed, getCredits, removeCredits} = require('../src/util');
+const {sendEmbed} = require('../src/util');
 const {sql} = require('../mysql/pool');
 
 
 module.exports = {
     name: 'perk',
     requiresSteamVerification: true,
-    async execute(message, args, steamid) {
+    async execute(message, args, user) {
 
-        let allCredits = await getCredits(steamid, 'all');
-        let mapCredits = await getCredits(steamid, 'map');
+        let steamid = user.steamid;
 
         if (!args[0]) {
-            let desc = `\nGain access to our extra rates exclusive servers! \n You currently have: \n **${allCredits} Bundles** \n **${mapCredits} Shiny's**\n Use **__TP!bal__** to check current balance\n\n\n**__Server Bundle Packs__** (Includes access to all Map IDs) \n`;
+            let desc = `\nGain access to our extra rates exclusive servers! \n You currently have: \n **${user.credits.all15} Bundles** \n **${user.credits.map15} Clumps**\n **${user.credits.map} Shiny's**\nUse **__TP!bal__** to check current balance\n\n\n**__Server Bundle Packs__** (Includes access to all Map IDs) \n`;
 
-            config.perks.filter(x => x.type === 'all').forEach(perk => {
+            config.perks.filter(x => x.type === 'all15').forEach(perk => {
                 desc += `${perk.days} days | ${perk.price} Bundles: \`${config.botPrefix}perk ${perk.id}\`\n`;
             });
             desc += `\n Available **__perk IDs__**, **__cost__** and **__command__**\n`;
+            config.perks.filter(x => x.type === 'map15').forEach(perk => {
+                desc += `ID - **__${perk.days}day__** = **__${perk.price}__** Clumps | \`${config.botPrefix}perk ${perk.id} {mapID}\`\n`;
+            });
             config.perks.filter(x => x.type === 'map').forEach(perk => {
                 desc += `ID - **__${perk.days}day__** = **__${perk.price}__** Shiny's | \`${config.botPrefix}perk ${perk.id} {mapID}\`\n`;
             });
@@ -44,9 +46,10 @@ module.exports = {
         }
 
 
-        let enoughCredits = item.type === 'map' ? mapCredits >= item.price : allCredits >= item.price;
-        if (enoughCredits) enoughCredits = await removeCredits(steamid, item.type, item.price, item.type === 'map' ? servers[0].id : 'all');
-        if (!enoughCredits) return sendEmbed(message, {description: `You do not have enough credits to use this perk.`});
+        if (user.credits[item.type] < item.price) return sendEmbed(message, {description: `You do not have enough credits to use this perk.`});
+
+        user.credits[item.type] -= item.price;
+        await updateCredits(user);
 
 
         for (let server of servers) {
@@ -58,6 +61,6 @@ module.exports = {
             }
         }
 
-        await sendEmbed(message, {description: `**Successfully redeemed** \`${item.id}\` in **${item.type === 'map' ? ` ${servers[0].id}` : 'all maps'}**, please **allow up to 1 minute** for the server to process your request. You will receive a **confirmation by private message** once the process finishes (make sure your DM's are open).`});
+        await sendEmbed(message, {description: `**Successfully redeemed** \`${item.id}\` in **${item.type !== 'all15' ? ` ${servers[0].id}` : 'all maps'}**, please **allow up to 1 minute** for the server to process your request. You will receive a **confirmation by private message** once the process finishes (make sure your DM's are open).`});
     }
 };

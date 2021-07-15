@@ -1,11 +1,12 @@
 const config = require('../config.json');
-const {sendEmbed, getPoints, removePoints} = require('../src/util');
-const {sql} = require('../mysql/pool');
+const {sendEmbed, getPoints, removePoints, updateCredits} = require('../src/util');
 
 module.exports = {
     name: 'buy',
     requiresSteamVerification: true,
-    async execute(message, args, steamid) {
+    async execute(message, args, user) {
+
+        let steamid = user.steamid;
 
         let id = args[0];
         if (!id) { // Help message.
@@ -23,11 +24,8 @@ module.exports = {
         if (points < item.price) return await sendEmbed(message, {description: `You do not have enough points.`});
         await removePoints(steamid, item.price);
 
-        let values = [], now = Date.now();
-        for (let i = 0; i < item.amount; i++) {
-            values.push(`('${steamid}', '${item.type}', ${now})`);
-        }
-        await sql.query(`INSERT INTO ${config.mysql.discordAddonDb}.tpg_credits (steamid, credit_type, added_timestamp) VALUES ${values.join(', ')};`);
+        user.credits[item.type] += item.amount;
+        await updateCredits(user);
 
         await sendEmbed(message, {description: `Successfully bought **${item.name}** for ${item.price} TrashSnacks.`});
     }

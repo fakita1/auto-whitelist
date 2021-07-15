@@ -1,5 +1,5 @@
 const config = require('../config.json');
-const {sendEmbed, getDiscordAddonUser} = require('../src/util');
+const {sendEmbed, getDiscordAddonUser, updateCredits} = require('../src/util');
 const {sql} = require('../mysql/pool');
 
 
@@ -15,7 +15,10 @@ module.exports = {
         if (!user) return sendEmbed(message, {description: `${taggedUser.tag}'s account is not linked to any SteamID`});
 
         // Setting all unused credits as used.
-        await sql.query(`UPDATE ${config.mysql.discordAddonDb}.tpg_credits SET used_timestamp = ?, used_map = ? WHERE steamid = ? AND used_timestamp IS NULL;`, [Date.now(), 'admin_remove', user.SteamId]);
+        user.credits.map = 0;
+        user.credits.map15 = 0;
+        user.credits.all15 = 0;
+        await updateCredits(user);
 
 
         // Expire automated function will later remove whitelist.

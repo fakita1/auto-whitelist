@@ -44,22 +44,21 @@ client.on('message', async message => {
     if (!command) return; // Command does not exist.
 
     if (command.isAdminCommand && !config.adminIDs.includes(message.author.id)) return await sendEmbed(message, {description: `This command is **admins only**.`});
-    let steamid = null;
+    let user = null;
 
     try {
 
         if (command.requiresSteamVerification) {
 
-            let user = await getDiscordAddonUser(message.author.id);
+            user = await getDiscordAddonUser(message.author.id);
 
             // No user with that DiscordID found in DB.
             if (!user) return await sendEmbed(message, {description: `Your discord account is **not linked to any SteamID**. Please execute the \`${config.botPrefix}verify\` command.`});
 
-            steamid = user.SteamId;
         }
 
 
-        command.execute(message, args, steamid);
+        command.execute(message, args, user);
 
     } catch (error) {
         console.error(error);
