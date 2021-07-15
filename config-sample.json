@@ -120,6 +120,18 @@
       "price": 400
     }
   ],
+  "shopPages": [
+    {
+      "title": "TPG Shop | Page 1",
+      "description": "Hey! This is a **description** :)",
+      "image": "http://cdn.shopify.com/s/files/1/1061/1924/products/Brachiosaurus_Iphone_Emoji_JPG_grande.png?v=1571606114"
+    },
+    {
+      "title": "TPG Shop | Page 2",
+      "description": "Hey! This is a **description** __2__ :)",
+      "image": "https://images.emojiterra.com/google/android-11/512px/1f996.png"
+    }
+  ],
   "tiers": [
     {
       "id": "bronze",

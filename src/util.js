@@ -4,7 +4,7 @@ const {sql} = require('../mysql/pool');
 
 
 // Sends a default embed with specified options.
-function sendEmbed(message, options) {
+function sendEmbed(message, options, msg) {
     return new Promise(async (resolve, reject) => {
 
         let user, channel;
@@ -23,8 +23,11 @@ function sendEmbed(message, options) {
             .setColor(config.embeds.color);
 
         if (options.image) embed.setThumbnail(options.image);
+        if (options.imageBig) embed.setImage(options.imageBig);
 
-        resolve(await channel.send(embed));
+        if (!msg) resolve(await channel.send(embed));
+        else resolve(await msg.edit(embed));
+
 
     });
 }
@@ -78,7 +81,7 @@ function removePoints(steamid, amount) {
 function updateCredits(user) {
     return new Promise(async (resolve, reject) => {
 
-        await sql.query(`UPDATE ${config.mysql.discordAddonDb}.discordaddonplayers SET tpg_credits = ? WHERE discid = ?;`, [ JSON.stringify(user.credits), user.discid]);
+        await sql.query(`UPDATE ${config.mysql.discordAddonDb}.discordaddonplayers SET tpg_credits = ? WHERE discid = ?;`, [JSON.stringify(user.credits), user.discid]);
         resolve(true);
 
     });

@@ -1,4 +1,5 @@
 const config = require('../config.json');
+const {shopPage} = require('../src/shopPagination');
 const {sendEmbed, getPoints, removePoints, updateCredits} = require('../src/util');
 
 module.exports = {
@@ -10,11 +11,7 @@ module.exports = {
 
         let id = args[0];
         if (!id) { // Help message.
-            let desc = `This is our current shop list! Please follow the following syntax and redeem using TP!perk :\n\nItem | (Cost) : Command\n`;
-            config.shop.forEach(item => {
-                desc += `**${item.name}** | **(${item.price} TrashSnacks)**: \`${config.botPrefix}buy ${item.id}\`\n\n`;
-            });
-            return await sendEmbed(message, {description: desc});
+            return await shopPage(null, message, 0);
         }
 
         let item = config.shop.find(x => x.id === id);
