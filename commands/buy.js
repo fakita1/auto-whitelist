@@ -7,7 +7,7 @@ module.exports = {
     requiresSteamVerification: true,
     async execute(message, args, user) {
 
-        let steamid = user.steamid;
+        let steamid = user.SteamId;
 
         let id = args[0];
         if (!id) { // Help message.

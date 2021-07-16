@@ -8,7 +8,7 @@ module.exports = {
     requiresSteamVerification: true,
     async execute(message, args, user) {
 
-        let steamid = user.steamid;
+        let steamid = user.SteamId;
 
         const [rows, fields] = await sql.query(`SELECT * FROM ${config.mysql.discordAddonDb}.tpg_maps WHERE steamid = ? AND expired IS NULL;`, [steamid]);
 

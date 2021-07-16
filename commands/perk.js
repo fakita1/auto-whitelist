@@ -8,7 +8,7 @@ module.exports = {
     requiresSteamVerification: true,
     async execute(message, args, user) {
 
-        let steamid = user.steamid;
+        let steamid = user.SteamId;
 
         if (!args[0]) {
             let desc = `\nGain access to our extra rates exclusive servers! \n You currently have: \n **${user.credits.all15} Bundles** \n **${user.credits.map15} Clumps**\n **${user.credits.map} Shiny's**\nUse **__TP!bal__** to check current balance\n\n\n**__Server Bundle Packs__** (Includes access to all Map IDs) \n`;
