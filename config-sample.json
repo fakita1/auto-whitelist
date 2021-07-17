@@ -18,44 +18,86 @@
   "botPrefix": "TP!",
   "servers": [
     {
-      "id": "ragna1",
-      "name": "Ragnarok 1",
+      "id": "ragnarok",
+      "name": "ragnarok",
       "ip": "",
-      "rconPort": 32400,
+      "rconPort": 32358,
       "adminPassword": ""
     },
     {
-      "id": "val",
-      "name": "Valguero",
+      "id": "modded",
+      "name": "modded",
       "ip": "",
-      "rconPort": 32400,
+      "rconPort": 32368,
+      "adminPassword": ""
+    },
+    {
+      "id": "valguero",
+      "name": "valguero",
+      "ip": "",
+      "rconPort": 32362,
+      "adminPassword": ""
+    },
+    {
+      "id": "crystal",
+      "name": "crystal",
+      "ip": "",
+      "rconPort": 32364,
+      "adminPassword": ""
+    },
+    {
+      "id": "olympus",
+      "name": "olympus",
+      "ip": "",
+      "rconPort": 32360,
+      "adminPassword": ""
+    },
+    {
+      "id": "genesis2",
+      "name": "genesis 2",
+      "ip": "",
+      "rconPort": 32390,
+      "adminPassword": ""
+    },
+    {
+      "id": "extinction",
+      "name": "extinction",
+      "ip": "",
+      "rconPort": 32356,
+      "adminPassword": ""
+    },
+    {
+      "id": "fjordur",
+      "name": "fjordur",
+      "ip": "",
+      "rconPort": 32366,
       "adminPassword": ""
     }
   ],
   "perks": [
     {
       "id": "30all",
-      "type": "all",
+      "type": "all15",
       "days": 30,
       "price": 2
     },
     {
-      "id": "14all",
-      "type": "all",
-      "days": 14,
+      "id": "15all",
+      "type": "all15",
+      "days": 15,
       "price": 1
     },
     {
       "id": "30day",
-      "type": "map",
+      "type": "map15",
       "days": 30,
-      "price": 30
+      "price": 2
     },
     {
       "id": "14day",
-      "type": "map",
-      "days": 14,
-      "price": 14
+      "type": "map15",
+      "days": 15,
+      "price": 1
     },
     {
       "id": "7day",
@@ -118,6 +160,13 @@
       "type": "map",
       "amount": 1,
       "price": 400
+    },
+    {
+      "id": "kit1",
+      "kitId": "ingamekitid",
+      "name": "Fabulous kit",
+      "type": "kit",
+      "price": 400
     }
   ],
   "shopPages": [
@@ -136,37 +185,44 @@
     {
       "id": "bronze",
       "mapCredits": 30,
-      "allCredits": 0
+      "map15Credits": 0,
+      "all15Credits": 0
     },
     {
       "id": "silver",
       "mapCredits": 60,
-      "allCredits": 0
+      "map15Credits": 0,
+      "all15Credits": 0
     },
     {
       "id": "gold",
       "mapCredits": 0,
-      "allCredits": 2
+      "map15Credits": 0,
+      "all15Credits": 2
     },
     {
       "id": "diamond",
       "mapCredits": 60,
-      "allCredits": 0
+      "map15Credits": 0,
+      "all15Credits": 0
     },
     {
       "id": "plat",
       "mapCredits": 0,
-      "allCredits": 2
+      "map15Credits": 0,
+      "all15Credits": 2
     },
     {
       "id": "shiny",
       "mapCredits": 0,
-      "allCredits": 2
+      "map15Credits": 0,
+      "all15Credits": 2
     },
     {
       "id": "maps",
       "mapCredits": 0,
-      "allCredits": 2
+      "map15Credits": 0,
+      "all15Credits": 2
     }
   ]
 }
