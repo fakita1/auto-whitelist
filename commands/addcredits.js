@@ -25,6 +25,6 @@ module.exports = {
         await updateCredits(user);
 
 
-        await sendEmbed(message, {description: `Successfully added ${taggedUser.tag} **${amount} \`${type}\` credits.`});
+        await sendEmbed(message, {description: `Successfully added ${taggedUser.tag} **${amount}** \`${type}\` credits.`});
     }
 };

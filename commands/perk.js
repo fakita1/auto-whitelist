@@ -1,5 +1,5 @@
 const config = require('../config.json');
-const {sendEmbed} = require('../src/util');
+const {sendEmbed, updateCredits} = require('../src/util');
 const {sql} = require('../mysql/pool');
 
 
@@ -37,7 +37,7 @@ module.exports = {
         if (!item) return sendEmbed(message, {description: `Selected pack does not exist.`});
 
         let servers = [];
-        if (item.type === 'map') {
+        if (item.type === 'map' || item.type === 'map15') {
             let server = config.servers.find(x => x.id === args[1]);
             if (!server) return sendEmbed(message, {description: `Selected server does not exist.`});
             servers.push(server);
