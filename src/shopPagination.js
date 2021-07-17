@@ -93,12 +93,6 @@ function awaitR(msg, message, emojis) {
 
 
 async function handleError(err, msg, message) {
-
-    await sendEmbed(message, {
-        title: 'Reaction timeout',
-        description: `I can't wait you forever, can I? 5 minutes have passed since your last reaction.`
-    }, msg);
-    await msg.reactions.removeAll();
-
+    await msg.delete({timeout: 0});
 }
 

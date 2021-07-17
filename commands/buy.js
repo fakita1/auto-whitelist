@@ -35,6 +35,16 @@ module.exports = {
         }
 
 
-        await sendEmbed(message, {description: `Successfully bought **${item.name}** for ${item.price} TrashSnacks.`});
+        let msg = await sendEmbed(message, {description: `Successfully bought **${item.name}** for ${item.price} TrashSnacks. This message will be deleted in 1 minute and a confirmation will be sent to your DM's.`});
+        try {
+            await sendEmbed(message.author.id, {description: `Successfully bought **${item.name}** for ${item.price} TrashSnacks.`});
+            setTimeout(async () => {
+                await msg.delete({timeout: 0});
+            }, 60000);
+        } catch (e) {
+            // Do nothing, user has DM's disabled.
+        }
+
+
     }
 };
