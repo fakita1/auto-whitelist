@@ -53,7 +53,7 @@ client.on('message', async message => {
             user = await getDiscordAddonUser(message.author.id);
 
             // No user with that DiscordID found in DB.
-            if (!user) return await sendEmbed(message, {description: `Your discord account is **not linked to any SteamID**. Please execute the \`${config.botPrefix}verify\` command.`});
+            if (!user) return await sendEmbed(message, {description: `Your discord account is **not linked to any SteamID**. Please execute the \`.verify\` command.`});
 
         }
 

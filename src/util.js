@@ -40,6 +40,8 @@ function getDiscordAddonUser(id) {
         const [rows, fields] = await sql.query(`SELECT * FROM ${config.mysql.discordAddonDb}.discordaddonplayers WHERE discid = ? OR steamid = ? LIMIT 1;`, [id, id]);
         let user = rows[0];
 
+        if (!user) return resolve(null);
+
         let credits = JSON.parse(user.tpg_credits);
 
         if (!credits.map) credits.map = 0;
